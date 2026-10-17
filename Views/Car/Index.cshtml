@@ -1,0 +1,30 @@
+﻿@model List<Car>
+<h1 class="mb-4">Available Cars</h1>
+@if (Model.Count==0)
+{
+	<div class="alert alert-info">No cars are available at the moment</div>
+}
+else
+{
+	<p>Choose from the available cars</p>
+	<div class="row g-5">
+		@foreach (var m in Model)
+		{
+			<div class="col-md-4">
+				<div class="card shadow h-100">
+					<div class="d-flex flex-column card-body">
+						<div class="card-title">Name: @m.Name</div>
+						<div class="card-text">Price Per Day: @m.PricePerDay</div>
+					</div>
+					<div>
+						<span class="badge bg-success mx-3 mb-2">Available</span>
+					</div>
+					<form asp-controller="Car" asp-action="Book" method="post" class="mt-auto">
+						<input type="hidden" name="carId" value=@m.Id />
+						<button type="submit" class="btn-primary btn w-100">Book Car</button>
+					</form>
+				</div>
+			</div>
+		}
+	</div>
+}
